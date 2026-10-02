@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Katalog Produk Responsif</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* clamp() untuk typography fluid */
+  h1 { font-size: clamp(1.75rem, 1.1rem + 3vw, 3.25rem); line-height: 1.1; }
+  h2 { font-size: clamp(1.25rem, 1rem + 1.2vw, 2rem); }
+  .lead { font-size: clamp(0.95rem, 0.85rem + 0.5vw, 1.2rem); }
+  .price { font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); }
+</style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+<!-- NAVBAR RESPONSIF (hamburger di mobile) -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <nav class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="#" class="text-xl font-bold text-indigo-600">🛍️ JerrStuff</a>
+    <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Buka menu" aria-expanded="false">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <ul id="menu" class="hidden md:flex absolute md:static top-full left-0 right-0 flex-col md:flex-row bg-white md:bg-transparent border-b md:border-0 border-slate-200 md:gap-6 p-4 md:p-0 gap-3 font-medium">
+      <li><a href="#" class="hover:text-indigo-600">Beranda</a></li>
+      <li><a href="#produk" class="hover:text-indigo-600">Produk</a></li>
+      <li><a href="#kontak" class="hover:text-indigo-600">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="bg-gradient-to-br from-indigo-600 to-fuchsia-600 text-white">
+  <div class="max-w-7xl mx-auto px-4 py-10 sm:py-14 lg:py-20">
+    <h1 class="font-extrabold">Katalog Produk </h1>
+    <p class="lead mt-3 max-w-xl text-indigo-100">Temukan berbagai produk pilihan yang bagus.</p>
+  </div>
+</section>
+
+<!-- GRID PRODUK: 1 → 2 → 3 → 4 kolom -->
+<main id="produk" class="max-w-7xl mx-auto px-4 py-8 sm:py-12">
+  <h2 class="font-bold mb-6">Produk Terbaru</h2>
+  <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"></div>
+</main>
+
+<!-- FOOTER -->
+<footer id="kontak" class="bg-slate-900 text-slate-300 mt-8">
+  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div><p class="text-white font-bold text-lg">🛍️ JerrStuff</p><p class="mt-2 text-sm">Belanja mudah, harga bersahabat.</p></div>
+    <div><p class="text-white font-semibold">Menu</p><ul class="mt-2 space-y-1 text-sm"><li>Beranda</li><li>Produk</li><li>Kontak</li></ul></div>
+    <div><p class="text-white font-semibold">Kontak</p><p class="mt-2 text-sm">Medan, Sumatera Utara<br>halo@jerrstuff.test</p></div>
+  </div>
+  <p class="text-center text-xs py-4 border-t border-slate-800">© 2026 Jerrstuff. Tugas Rutin 3 – Pemrograman Web.</p>
+</footer>
+
+<!-- Indikator breakpoint (untuk screenshot dokumentasi testing) -->
+<div class="fixed bottom-3 left-3 z-50 text-xs font-mono px-2 py-1 rounded bg-black/80 text-white">
+  <span class="sm:hidden">base &lt;640px</span>
+  <span class="hidden sm:inline md:hidden">sm ≥640px</span>
+  <span class="hidden md:inline lg:hidden">md ≥768px</span>
+  <span class="hidden lg:inline xl:hidden">lg ≥1024px</span>
+  <span class="hidden xl:inline">xl ≥1280px</span>
+</div>
+
+<script>
+  // Format: [nama, harga, emoji, warna, foto]
+  // Isi "foto" dengan path gambarmu, contoh: "img/sepatu.jpg". Kosongkan "" untuk pakai placeholder.
+  const products = [
+    ["Sepatu Sneakers", 349000, "👟", "#6366f1", "img/sepatu.jpg"],
+    ["Tas Ransel", 275000, "🎒", "#ec4899", "img/tas.jpg"],
+    ["Headphone Wireless", 499000, "🎧", "#0ea5e9", "img/headphone.jpg"],
+    ["Jam Tangan", 650000, "⌚", "#f59e0b", "img/jamtangan.jpg"],
+    ["Kacamata Hitam", 129000, "🕶️", "#10b981", "img/kacamata.jpg"],
+    ["Kamera Mirrorless", 5200000, "📷", "#8b5cf6", "img/kamera.jpg"],
+    ["Topi Baseball", 89000, "🧢", "#ef4444", "img/topi.jpg"],
+    ["Botol Minum", 75000, "🥤", "#14b8a6", "img/botolminum.jpg"]
+  ];
+  const rp = n => "Rp " + n.toLocaleString("id-ID");
+  // gambar SVG inline (responsive: w-full + aspect ratio)
+  const img = (emoji, color) => "data:image/svg+xml," + encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='300' fill='${color}'/><text x='200' y='170' font-size='110' text-anchor='middle'>${emoji}</text></svg>`);
+
+  document.getElementById("grid").innerHTML = products.map(([name, price, emoji, color, foto]) => `
+    <article class="bg-white rounded-2xl shadow-sm hover:shadow-lg transition overflow-hidden flex flex-col">
+      <img src="${foto || img(emoji, color)}" alt="${name}" loading="lazy"
+           onerror="this.onerror=null;this.src='${img(emoji, color)}'"
+           class="w-full h-auto aspect-[4/3] object-cover">
+      <div class="p-4 flex flex-col flex-1">
+        <h3 class="font-semibold text-base sm:text-lg">${name}</h3>
+        <p class="text-sm text-slate-500 mt-1">Kualitas terbaik, stok tersedia.</p>
+        <p class="price font-bold text-indigo-600 mt-3">${rp(price)}</p>
+        <button class="mt-4 w-full py-2.5 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 active:scale-95 transition">Beli Sekarang</button>
+      </div>
+    </article>`).join("");
+
+  const btn = document.getElementById("menuBtn"), menu = document.getElementById("menu");
+  btn.addEventListener("click", () => {
+    const open = menu.classList.toggle("hidden") === false;
+    btn.setAttribute("aria-expanded", open);
+  });
+</script>
+</body>
+</html>
